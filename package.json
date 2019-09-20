@@ -1,6 +1,6 @@
 {
   "name": "request-promise-jaeger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,5 +20,13 @@
   "devDependencies": {
     "@types/request-promise": "^4.1.44",
     "tslint": "^5.20.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zijin-m/request-promise-jaeger"
+  },
+  "bugs": {
+    "url": "https://github.com/zijin-m/request-promise-jaeger/issues"
+  },
+  "homepage": "https://github.com/zijin-m/request-promise-jaeger#readme"
 }

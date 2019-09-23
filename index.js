@@ -1,6 +1,8 @@
 'use strict';
 
 const rp = require('request-promise');
+const url = require('url');
+
 const { FORMAT_HTTP_HEADERS, Tags } = require('opentracing');
 
 module.exports = async function(...args) {
@@ -24,7 +26,9 @@ module.exports = async function(...args) {
     },
     childOf: options.rootSpan
   };
-  const span = options.tracer.startSpan(`HTTP ${method}`, spanOptions);
+  const reqUrl = new url.URL(options.url);
+  const path = `${reqUrl.pathname}${reqUrl.search}`;
+  const span = options.tracer.startSpan(`${path}`, spanOptions);
   options.tracer.inject(span, FORMAT_HTTP_HEADERS, options.headers);
   try {
     const res = await rp.apply(this, args);

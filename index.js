@@ -9,7 +9,7 @@ module.exports = async function(...args) {
   let options;
   if (typeof args[0] === 'string') {
     options = args[1] || {};
-    options.url = args[0];
+    options.uri = args[0];
   } else {
     options = args[0];
   }
@@ -21,12 +21,12 @@ module.exports = async function(...args) {
   const spanOptions = {
     tags: {
       [Tags.HTTP_METHOD]: method,
-      [Tags.HTTP_URL]: options.url,
+      [Tags.HTTP_URL]: options.uri,
       'http.req_body': options.data || {}
     },
     childOf: options.rootSpan
   };
-  const reqUrl = new url.URL(options.url);
+  const reqUrl = new url.URL(options.uri);
   const path = `${reqUrl.pathname}${reqUrl.search}`;
   const span = options.tracer.startSpan(`${path}`, spanOptions);
   options.tracer.inject(span, FORMAT_HTTP_HEADERS, options.headers);
